@@ -1,0 +1,37 @@
+core:
+  app:
+    env: ${ENV_NAME:"local"}
+    logger:
+      config_file:
+        production: "logging_production.ini"
+        development: "logging_development.ini"
+        local: "logging_development.ini"
+
+infrastructures:
+  open_ai:
+    openai_api_key: ${OPENAI_API_KEY}
+    max_tokens: ${OPENAI_MAX_TOKENS:15000}
+    temperature: ${OPENAI_TEMPERATURE:0.6}
+  aws:
+    access_key_id: ${AWS_ACCESS_KEY_ID}
+    secret_access_key: ${AWS_SECRET_ACCESS_KEY}
+    s3_image_bucket:
+      production: "sensayai-images"
+      development: "sensayai-images-dev"
+      local: "sensayai-images-local"
+  replicate:
+    access_token: ${REPLICATE_TOKEN}
+    caption_model:
+      model_id: ${REPLICATE_MODEL:"salesforce/blip:2e1dddc8621f72155f24cf2e0adbde548458d3cab9f00c0139eea840d0ac4746"}
+  db:
+    url: ${DB_URL}
+  auth0:
+    domain: "dev-kpookvh6nj230wwk.us.auth0.com"
+    audience: "https://dev-kpookvh6nj230wwk.us.auth0.com/api/v2/"
+    issuer: "https://dev-kpookvh6nj230wwk.us.auth0.com/"
+    algorithms: "RS256"
+  sentry:
+    dsn:
+      production: "https://c14bcbd567f0f64f03ed68a924308377@o4505696978468864.ingest.sentry.io/4505696980303872"
+      development: "https://c14bcbd567f0f64f03ed68a924308377@o4505696978468864.ingest.sentry.io/4505696980303872"
+      local: ""
