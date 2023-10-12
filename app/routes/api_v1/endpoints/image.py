@@ -8,13 +8,9 @@ from dependency_injector.wiring import Provide, inject
 from fastapi import APIRouter, Depends, HTTPException, UploadFile, status
 
 from app.container.containers import Container
-from app.infrastructure.aws.s3 import (
-    S3FilesInFolderResponse,
-    S3Service,
-    UploadS3FileResponse,
-)
 from app.models.schemas.instagram import Me
 from app.routes.api_v1.endpoints.auth import check_user_facebook
+from app.services.instagram_media_upload_service import MediaUploadService, UploadS3FileResponse, S3FilesInFolderResponse
 
 #
 router = APIRouter()
@@ -26,7 +22,7 @@ async def upload_image_to_s3(
     image_file: UploadFile,
     s3_image_bucket: str = Depends(Provide[Container.s3_image_bucket]),
     auth: Me = Depends(check_user_facebook),
-    s3_service: S3Service = Depends(Provide[Container.s3_service]),
+    media_upload_service: MediaUploadService = Depends(Provide[Container.media_upload_service]),
 ) -> UploadS3FileResponse:
     file_extension = pathlib.Path(image_file.filename).suffix
     if file_extension not in [".png", ".jpg", ".jpeg"]:
@@ -47,7 +43,7 @@ async def upload_image_to_s3(
             status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
             detail="Your image is corrupted or damaged",
         )
-    result = s3_service.upload_file(
+    result = media_upload_service.upload_file_to_s3(
         file=temp_file,
         bucket_name=s3_image_bucket,
         user_id=auth.id,
@@ -65,11 +61,11 @@ async def upload_image_to_s3(
 @inject
 async def get_user_uploaded_images(
     auth: Me = Depends(check_user_facebook),
-    s3_service: S3Service = Depends(Provide[Container.s3_service]),
+    media_upload_service: MediaUploadService = Depends(Provide[Container.media_upload_service]),
     s3_image_bucket: str = Depends(Provide[Container.s3_image_bucket]),
 ) -> Dict[str, List[S3FilesInFolderResponse]]:
     return {
-        "items": s3_service.list_s3_files_in_folder(
+        "items": media_upload_service.list_s3_files_in_folder(
             bucket_name=s3_image_bucket,
             user_id=auth.id,
         )

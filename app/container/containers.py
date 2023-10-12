@@ -10,6 +10,10 @@ from dependency_injector.providers import Resource
 from app.infrastructure.aws.s3 import S3Service
 from app.infrastructure.db.database import Database
 from app.infrastructure.meta.instagram_platform.graph_api import InstagramGraphApiClient
+from app.repositories.instagram_image_upload_history_repository import InstagramImageUploadMetadataRepository
+from app.services.instagram_account_management import InstagramAccountManageService
+from app.services.instagram_media_insights import MediaInsightService
+from app.services.instagram_media_upload_service import MediaUploadService
 
 
 class Container(containers.DeclarativeContainer):
@@ -33,7 +37,6 @@ class Container(containers.DeclarativeContainer):
     sentry_sdk = providers.Resource(  # type: ignore [var-annotated]
         sentry_sdk.init,
         dsn=config.infrastructures.sentry.dsn[env_name],
-        # TODO: traces_sample_rate may have to update when the app up and running on prod
         traces_sample_rate=1.0,
         environment=env_name,
     )
@@ -75,4 +78,26 @@ class Container(containers.DeclarativeContainer):
 
     s3_image_bucket = providers.Resource(
         config.infrastructures.aws.s3_image_bucket[env_name]
+    )
+
+    image_upload_metadata_repository = providers.Factory(
+        InstagramImageUploadMetadataRepository,
+        session_factory=db.provided.session
+    )
+
+    media_upload_service = providers.Factory(
+        MediaUploadService,
+        instagram_graph_api_client=instagram_graph_api_client,
+        image_upload_metadata_repository=image_upload_metadata_repository,
+        s3=s3_service
+    )
+
+    media_insight_service = providers.Singleton(
+        MediaInsightService,
+        instagram_graph_api_client=instagram_graph_api_client,
+    )
+
+    account_management_service = providers.Singleton(
+        InstagramAccountManageService,
+        instagram_graph_api_client=instagram_graph_api_client,
     )

@@ -1,7 +1,8 @@
 import logging
 import time
 
-from fastapi import FastAPI, Request, Response
+from fastapi import FastAPI, Request
+from fastapi.responses import JSONResponse
 from sentry_sdk import capture_exception
 from starlette.middleware.cors import CORSMiddleware
 
@@ -13,16 +14,11 @@ API_V1_STR = "/api/v1"
 
 
 async def catch_exceptions_middleware(request: Request, call_next):  # type: ignore
-    try:
-        start_time = time.time()
-        response = await call_next(request)
-        process_time = time.time() - start_time
-        response.headers["X-Process-Time"] = str(process_time)
-        return response
-    except Exception as e:
-        logger.error(e)
-        capture_exception(e)
-        return Response("Internal server error", status_code=500)
+    start_time = time.time()
+    response = await call_next(request)
+    process_time = time.time() - start_time
+    response.headers["X-Process-Time"] = str(process_time)
+    return response
 
 
 def create_app() -> FastAPI:
@@ -32,10 +28,9 @@ def create_app() -> FastAPI:
     logger.debug("START create_app FastAPI")
     container.db()
     container.sentry_sdk()
-    # db.create_all() will not create database's table if DB already created.
-    # So you don't have to comment on your code.
-    # container.db().create_database()
-    # container.init_resources()
+
+    container.db().create_database()
+    container.init_resources()
 
     fast_api_app = FastAPI()
     fast_api_app.container = container
@@ -54,3 +49,11 @@ def create_app() -> FastAPI:
 
 
 app = create_app()
+
+
+@app.exception_handler(Exception)
+async def validation_exception_handler(request, err):
+    base_error_message = f"Failed to execute: {request.method}: {request.url}"
+    logger.error(err)
+    capture_exception(err)
+    return JSONResponse(status_code=400, content={"message": f"{base_error_message}. Detail: {err}"})
