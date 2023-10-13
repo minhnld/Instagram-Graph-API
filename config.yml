@@ -25,13 +25,13 @@ infrastructures:
       model_id: ${REPLICATE_MODEL:"salesforce/blip:2e1dddc8621f72155f24cf2e0adbde548458d3cab9f00c0139eea840d0ac4746"}
   db:
     url: ${DB_URL}
-  auth0:
-    domain: "dev-kpookvh6nj230wwk.us.auth0.com"
-    audience: "https://dev-kpookvh6nj230wwk.us.auth0.com/api/v2/"
-    issuer: "https://dev-kpookvh6nj230wwk.us.auth0.com/"
-    algorithms: "RS256"
+#  auth0:
+#    domain: ""
+#    audience: ""
+#    issuer: ""
+#    algorithms: "RS256"
   sentry:
     dsn:
-      production: "https://c14bcbd567f0f64f03ed68a924308377@o4505696978468864.ingest.sentry.io/4505696980303872"
-      development: "https://c14bcbd567f0f64f03ed68a924308377@o4505696978468864.ingest.sentry.io/4505696980303872"
+      production: ""
+      development: ""
       local: ""

@@ -5,8 +5,8 @@ from fastapi import APIRouter, Depends
 from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
 
 from app.container.containers import Container
-from app.infrastructure.meta.instagram_platform.graph_api import InstagramGraphApiClient
 from app.models.schemas.instagram import Me
+from app.services.instagram_account_management import InstagramAccountManageService
 
 logger = logging.getLogger()
 router = APIRouter()
@@ -16,6 +16,6 @@ router = APIRouter()
 @inject
 def check_user_facebook(
         token: HTTPAuthorizationCredentials = Depends(HTTPBearer()),
-        instagram_graph_api_client: InstagramGraphApiClient = Depends(Provide[Container.instagram_graph_api_client]),
+        account_management_service: InstagramAccountManageService = Depends(Provide[Container.account_management_service]),
 ) -> Me:
-    return instagram_graph_api_client.me(token.credentials)
+    return account_management_service.verify_token(token.credentials)

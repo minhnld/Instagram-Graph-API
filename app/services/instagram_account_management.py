@@ -31,3 +31,9 @@ class InstagramAccountManageService:
             token: str,
     ):
         return self.instagram_graph_api_client.get_user_pages(token)
+
+    def verify_token(
+            self,
+            token: str,
+    ):
+        return self.instagram_graph_api_client.me(token)
