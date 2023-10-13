@@ -96,7 +96,7 @@ readme = "README.md"
 [tool.poetry.dependencies]
 python = "^3.11"
 bcrypt = "^4.0.1"
-fastapi = "^0.97.0"
+fastapi = "^0.103.2"
 passlib = "^1.7.4"
 python-multipart = "^0.0.6"
 uvicorn = "^0.22.0"
