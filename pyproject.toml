@@ -1,0 +1,134 @@
+#################################################
+# Project metadata
+#################################################
+
+[project]
+requires-python = ">=3.8"
+name = "fastapi-nano"
+version = "0.1.0"
+description = "CoreService for Sensay-AI created from A minimal FastAPI project template."
+readme = "README.md"
+keywords = ["fastapi", "template", "minimal", "docker", "cookiecutter"]
+license = {file = "LICENSE"}
+authors = [
+    { name = "Minh Nguyen", email = "minh.nldang@gmail.com" },
+    { name = "Tri Tran", email = "tri.trancongtoan@gmail.com" },
+    { name = "Binh Pham", email = "bnh.quang@gmail.com" }
+]
+
+[project.urls]
+Repository = "https://github.com/Sensay-AI/core-service"
+
+#################################################
+# Mypy config
+#################################################
+
+[tool.mypy]
+follow_imports = "skip"
+ignore_missing_imports = true
+warn_no_return = true
+warn_unused_ignores = true
+allow_untyped_globals = true
+allow_redefinition = true
+disallow_untyped_defs = true
+no_implicit_optional = true
+show_error_codes = true
+pretty = true
+exclude = ['build','venv','.venv','alembic/production/env.py']
+
+[[tool.mypy.overrides]]
+module = "app.tests.*"
+ignore_errors = true
+
+#################################################
+# Ruff config
+#################################################
+
+[tool.ruff]
+line-length = 88
+
+# Enable Pyflakes `E` and `F` codes by default
+select = ["E", "F", "I001", "PT", "C4"]
+ignore = ["E501"]
+respect-gitignore = true
+
+per-file-ignores = {}
+
+# Allow unused variables when underscore-prefixed
+dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
+
+# Assume Python 3.11
+target-version = "py311"
+
+[tool.ruff.mccabe]
+# Unlike Flake8, default to a complexity level of 10
+max-complexity = 10
+
+#################################################
+# Pytest config
+#################################################
+
+[tool.pytest.ini_options]
+addopts = "--strict-markers --maxfail 1 --cov src --no-header"
+markers = """
+    integration: mark a test as an integration test.
+"""
+console_output_style = "progress"
+
+#################################################
+# Setuptools config
+#################################################
+
+[tool.setuptools.packages.find]
+where = ["app"]  # ["."] by default
+
+[tool.poetry]
+name = "fastapi-nano"
+version = "0.1.0"
+description = "CoreService for Sensay-AI created from A minimal FastAPI project template."
+authors = [
+    "minhnguyen <minh.nldang@gmail.com>",
+    "Tri Tran <tri.trancongtoan@gmail.com>",
+    "Binh Pham <bnh.quang@gmail.com>"
+]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+bcrypt = "^4.0.1"
+fastapi = "^0.97.0"
+passlib = "^1.7.4"
+python-multipart = "^0.0.6"
+uvicorn = "^0.22.0"
+gunicorn = "^20.1.0"
+python-jose = "^3.3.0"
+sqlalchemy = "^2.0.19"
+psycopg2-binary = "^2.9.6"
+pyjwt = "^2.1.0"
+singleton-decorator = "^1.0.0"
+cryptography = "^41.0.1"
+boto3 = "^1.28.23"
+pillow = "^10.0.0"
+boto3-type-annotations-with-docs = "^0.3.1"
+dependency-injector = "^4.41.0"
+pyyaml = "^6.0.1"
+sentry-sdk = { version = "*", extras = ["fastapi"] }
+tiktoken = "^0.4.0"
+jinja2 = "^3.1.2"
+requests = "^2.31.0"
+
+[tool.poetry.group.dev.dependencies]
+black = "^23.7.0"
+httpx = "^0.24.1"
+mypy = "^1.4.1"
+pip-tools = "^7.3.0"
+pytest-cov = "^4.1.0"
+ruff = "^0.0.284"
+pytest = "^7.3.2"
+requests = "^2.31.0"
+pytest-asyncio = "^0.21.1"
+alembic = "^1.11.2"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
