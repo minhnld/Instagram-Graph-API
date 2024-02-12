@@ -113,7 +113,7 @@ boto3-type-annotations-with-docs = "^0.3.1"
 dependency-injector = "^4.41.0"
 pyyaml = "^6.0.1"
 sentry-sdk = { version = "*", extras = ["fastapi"] }
-tiktoken = "^0.5.2"
+tiktoken = "^0.6.0"
 jinja2 = "^3.1.3"
 requests = "^2.31.0"
 
