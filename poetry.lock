@@ -1119,25 +1119,26 @@ files = [
 
 [[package]]
 name = "pip-tools"
-version = "7.3.0"
+version = "7.4.0"
 description = "pip-tools keeps your pinned dependencies fresh."
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "pip-tools-7.3.0.tar.gz", hash = "sha256:8e9c99127fe024c025b46a0b2d15c7bd47f18f33226cf7330d35493663fc1d1d"},
-    {file = "pip_tools-7.3.0-py3-none-any.whl", hash = "sha256:8717693288720a8c6ebd07149c93ab0be1fced0b5191df9e9decd3263e20d85e"},
+    {file = "pip-tools-7.4.0.tar.gz", hash = "sha256:a92a6ddfa86ff389fe6ace381d463bc436e2c705bd71d52117c25af5ce867bb7"},
+    {file = "pip_tools-7.4.0-py3-none-any.whl", hash = "sha256:b67432fd0759ed834c5367f9e0ce8c95441acecfec9c8e24b41aca166757adf0"},
 ]
 
 [package.dependencies]
-build = "*"
+build = ">=1.0.0"
 click = ">=8"
 pip = ">=22.2"
+pyproject_hooks = "*"
 setuptools = "*"
 wheel = "*"
 
 [package.extras]
 coverage = ["covdefaults", "pytest-cov"]
-testing = ["flit-core (>=2,<4)", "poetry-core (>=1.0.0)", "pytest (>=7.2.0)", "pytest-rerunfailures", "pytest-xdist", "tomli-w"]
+testing = ["flit_core (>=2,<4)", "poetry_core (>=1.0.0)", "pytest (>=7.2.0)", "pytest-rerunfailures", "pytest-xdist", "tomli-w"]
 
 [[package]]
 name = "platformdirs"
@@ -2005,4 +2006,4 @@ test = ["pytest (>=6.0.0)", "setuptools (>=65)"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "4f0b81cdabb1232fc042b992b0790bdf715f47889ce845ce4e80adefb0b33e0f"
+content-hash = "19533ecad15f83b41c1ad9fc1ac8f7b0a6f8d0107d62d486b700b844313e7118"
