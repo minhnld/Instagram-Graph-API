@@ -1119,13 +1119,13 @@ files = [
 
 [[package]]
 name = "pip-tools"
-version = "7.4.0"
+version = "7.4.1"
 description = "pip-tools keeps your pinned dependencies fresh."
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "pip-tools-7.4.0.tar.gz", hash = "sha256:a92a6ddfa86ff389fe6ace381d463bc436e2c705bd71d52117c25af5ce867bb7"},
-    {file = "pip_tools-7.4.0-py3-none-any.whl", hash = "sha256:b67432fd0759ed834c5367f9e0ce8c95441acecfec9c8e24b41aca166757adf0"},
+    {file = "pip-tools-7.4.1.tar.gz", hash = "sha256:864826f5073864450e24dbeeb85ce3920cdfb09848a3d69ebf537b521f14bcc9"},
+    {file = "pip_tools-7.4.1-py3-none-any.whl", hash = "sha256:4c690e5fbae2f21e87843e89c26191f0d9454f362d8acdbd695716493ec8b3a9"},
 ]
 
 [package.dependencies]
@@ -2006,4 +2006,4 @@ test = ["pytest (>=6.0.0)", "setuptools (>=65)"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "dc237f2618c49a645454afb2b690856c9674110740f076fd8fc8dae3ee511bee"
+content-hash = "4e9a8ed553c61e5cafc40d4839e33ebcc729e2c6ea7b2b29e08147bd4b5d9c6f"
