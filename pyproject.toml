@@ -126,7 +126,7 @@ pytest-cov = "^5.0.0"
 ruff = "^0.6.2"
 pytest = "^8.3.2"
 requests = "^2.32.3"
-pytest-asyncio = "^0.23.8"
+pytest-asyncio = "^0.24.0"
 alembic = "^1.13.2"
 
 [build-system]
