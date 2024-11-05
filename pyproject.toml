@@ -110,7 +110,7 @@ cryptography = "^43.0.3"
 boto3 = "^1.35.54"
 pillow = "^11.0.0"
 boto3-type-annotations-with-docs = "^0.3.1"
-dependency-injector = "^4.42.0"
+dependency-injector = "^4.43.0"
 pyyaml = "^6.0.2"
 sentry-sdk = { version = "*", extras = ["fastapi"] }
 tiktoken = "^0.8.0"
