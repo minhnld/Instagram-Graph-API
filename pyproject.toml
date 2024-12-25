@@ -114,7 +114,7 @@ dependency-injector = "^4.44.0"
 pyyaml = "^6.0.2"
 sentry-sdk = { version = "*", extras = ["fastapi"] }
 tiktoken = "^0.8.0"
-jinja2 = "^3.1.4"
+jinja2 = "^3.1.5"
 requests = "^2.32.3"
 
 [tool.poetry.group.dev.dependencies]
