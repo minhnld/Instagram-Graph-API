@@ -37,7 +37,7 @@ jobs:
         run: python -c "import sys; print(sys.version)"
 
       - name: Install poetry
-        uses: abatilo/actions-poetry@v3
+        uses: abatilo/actions-poetry@v4
 
       - name: Setup a local virtual environment (if no poetry.toml file)
         run: |
