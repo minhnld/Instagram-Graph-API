@@ -120,7 +120,7 @@ requests = "^2.32.3"
 [tool.poetry.group.dev.dependencies]
 black = "^25.1.0"
 httpx = "^0.28.1"
-mypy = "^1.14.1"
+mypy = "^1.15.0"
 pip-tools = "^7.4.1"
 pytest-cov = "^6.0.0"
 ruff = "^0.9.4"
